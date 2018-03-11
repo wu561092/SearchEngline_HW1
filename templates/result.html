@@ -8,22 +8,30 @@
 </head>
 <body>
 
+
 <div class="container">
-  <table>
-    <<thead>
-                <th>name</th>
+ <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">URL</th>
+      <th scope="col">Body</th>
+    </tr>
+  </thead>
+     <tbody>
+     {%set i=0%}
+     {% for one_title in all_title %}
+     <tr>
+         <td>{{ all_title[i] }}</td>
+         <td>{{  all_url[i] }}</td>
+         <td>{{ all_body[i] }}</td>
+     </tr>
+     {%set i=i+1%}
+     {% endfor %}
 
-            </thead>
-            <tbody>
-                {{result}}
 
-                {% for person in result %}
-                <tr>
-                   <td>{{ person }}</td>
-                </tr>
-                {% endfor %}
 
-            </tbody>
+     </tbody>
   </table>
 </div>
 
