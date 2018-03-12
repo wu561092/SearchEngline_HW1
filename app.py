@@ -15,9 +15,7 @@ es = Elasticsearch()
 def index():
         return  render_template('index.html')
 
-@app.route('/search')
-def search():
-    return render_template('search.html')
+
 
 
 @app.route('/info')
@@ -29,7 +27,7 @@ def info():
 def result():
    if request.method == 'POST':
       result = request.form['search']
-      res = es.search(index='news', body={  'query': {    'match': {      'title': result,     }  }})
+      res = es.search(index='news', body={  'query': {    'match': {      'body': result,     }  }})
       all_body_list=[]
       all_title_list=[]
       all_url_list=[]
@@ -37,7 +35,7 @@ def result():
           all_body_list.append(doc['_source']['body'])
           all_title_list.append(doc['_source']['title'])
           all_url_list.append(doc['_source']['url'])
-      return render_template("result.html",all_body=all_body_list,all_title=all_title_list,all_url=all_url_list)
+      return render_template("result.html",all_body=all_body_list,all_title=all_title_list,all_url=all_url_list,result_text=result)
 
 
 if __name__ == '__main__':
